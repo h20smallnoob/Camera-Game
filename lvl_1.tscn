@@ -223,3 +223,6 @@ position = Vector2(1677, 430)
 
 [node name="button" parent="." unique_id=1275414082 instance=ExtResource("6_t6wp4")]
 position = Vector2(1822, 391)
+
+[node name="button2" parent="." unique_id=1489700649 instance=ExtResource("6_t6wp4")]
+position = Vector2(80, 22)
