@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dqgvg7ek30774"]
+
+[sub_resource type="GDScript" id="GDScript_n74wa"]
+script/source = "extends Area2D
+
+func _ready() -> void:
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group(\"player\"):
+		
+		
+		body.process_mode = Node.PROCESS_MODE_DISABLED 
+		
+		
+		set_deferred(\"monitoring\", false)
+		
+		death_sequence()
+
+func death_sequence() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.layer = 100 
+	add_child(canvas)
+	GameManager.player_boost = 1
+	var fade = ColorRect.new()
+	fade.color = Color.BLACK
+	fade.color.a = 0 
+	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	canvas.add_child(fade)
+	
+
+	var tween = create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	
+	tween.tween_property(fade, \"color:a\", 1.0, 1.5) # 1.5 second fade
+	
+	await tween.finished
+	
+	get_tree().reload_current_scene()
+"
+
+[node name="killzone" type="Area2D" unique_id=1300626752]
+script = SubResource("GDScript_n74wa")
+
+[node name="Timer" type="Timer" parent="." unique_id=247653497]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

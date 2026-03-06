@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bugmfl3kw87vl"]
+
+[ext_resource type="Texture2D" uid="uid://clnu16cni5qqc" path="res://brackeys_platformer_assets 2/sprites/fruit.png" id="1_6k3qi"]
+
+[sub_resource type="GDScript" id="GDScript_0qle8"]
+script/source = "extends Area2D
+
+# This allows you to pick the file in the Inspector
+@export_file(\"*.tscn\") var next_scene_path: String
+
+func _on_body_entered(body: Node2D):
+	# Check if it's the player
+	if body.has_method(\"die\"):
+		# 1. Clear Tutorial data so Level 1 starts fresh
+		GameManager.last_checkpoint_pos = Vector2.ZERO
+		GameManager.camera_at_checkpoint = false
+		
+		# 2. Change the scene if a path is set
+		if next_scene_path != \"\":
+			get_tree().change_scene_to_file(next_scene_path)
+		else:
+			print(\"Forgot to set the scene path in the Inspector!\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p20yd"]
+
+[node name="goal" type="Area2D" unique_id=1242369407]
+script = SubResource("GDScript_0qle8")
+next_scene_path = "uid://cq8k0vx8yc213"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2124503515]
+shape = SubResource("RectangleShape2D_p20yd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052131081]
+position = Vector2(1, 0)
+scale = Vector2(0.3125, 0.296875)
+texture = ExtResource("1_6k3qi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

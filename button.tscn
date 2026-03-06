@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c6takejyrn2f3"]
+
+[ext_resource type="Texture2D" uid="uid://c6tc25dkma1m5" path="res://Screenshot 2026-02-23 at 11.40.12 am.png" id="1_r04n3"]
+
+[sub_resource type="GDScript" id="GDScript_n4tde"]
+script/source = "extends Area2D
+
+@onready var timer: Timer = $Timer
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.name == 'camera':
+		print('pressed')
+		GameManager.player_boost = 2
+		$Timer.start()
+
+
+
+func _on_timer_timeout() -> void:
+	GameManager.player_boost = 1
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxja4"]
+size = Vector2(28, 10)
+
+[node name="button" type="Area2D" unique_id=1275414082]
+script = SubResource("GDScript_n4tde")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=186937508]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_vxja4")
+
+[node name="Screenshot20260223At11_40_12Am" type="Sprite2D" parent="." unique_id=19894790]
+position = Vector2(-1.1444092e-05, -7.000004)
+scale = Vector2(0.05452127, 0.06805555)
+texture = ExtResource("1_r04n3")
+
+[node name="Timer" type="Timer" parent="." unique_id=35580561]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

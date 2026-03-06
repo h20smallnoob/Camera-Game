@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ckudr8chj1kgo"]
+
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="1_4flbx"]
+
+[node name="player" unique_id=1859316243 instance=ExtResource("1_4flbx")]
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=694539819]
+position = Vector2(50.00001, 52.000008)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=123209990]
+position = Vector2(0, -3)

@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://ck0u4xiq2mfum"]
+
+[ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="1_diie0"]
+[ext_resource type="Texture2D" uid="uid://bh73e8ks1tequ" path="res://centered_1024_scaled.png" id="1_u5kg4"]
+
+[sub_resource type="GDScript" id="GDScript_u5kg4"]
+script/source = "extends RigidBody2D
+
+func _ready():
+	lock_rotation = true
+	linear_damp = 5.0 
+	if GameManager.last_checkpoint_pos != Vector2.ZERO:
+		global_position = GameManager.last_checkpoint_pos + Vector2(40, -10)
+		
+func _physics_process(_delta):
+
+	pass
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_diie0"]
+radius = 5.9999704
+height = 17.999912
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_diie0"]
+a = Vector2(-378, 201)
+b = Vector2(362, 193)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qqjab"]
+a = Vector2(356, -229)
+b = Vector2(358, 195)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p6dlx"]
+a = Vector2(356, -226)
+b = Vector2(-367, -229)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_eeger"]
+a = Vector2(-368, 207)
+b = Vector2(-365, -222)
+
+[node name="camera" type="RigidBody2D" unique_id=1169415746]
+collision_layer = 9
+mass = 0.001
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 1.0
+script = SubResource("GDScript_u5kg4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=888992929]
+z_index = 10
+position = Vector2(7, 5)
+scale = Vector2(0.06640626, 0.057617195)
+texture = ExtResource("1_u5kg4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1003860093]
+position = Vector2(1.4210855e-14, 1)
+rotation = -1.5694852
+shape = SubResource("CapsuleShape2D_diie0")
+one_way_collision_margin = 9.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=179998912]
+zoom = Vector2(2.5, 2.5)
+
+[node name="fog" type="Sprite2D" parent="." unique_id=1621446956]
+
+[node name="out of camera" parent="." unique_id=1300626752 instance=ExtResource("1_diie0")]
+position = Vector2(3, -3)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="out of camera" unique_id=2011663137]
+position = Vector2(3, 6)
+shape = SubResource("SegmentShape2D_diie0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="out of camera" unique_id=1435987158]
+position = Vector2(3, -1)
+shape = SubResource("SegmentShape2D_qqjab")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="out of camera" unique_id=1311317046]
+position = Vector2(1, 0)
+shape = SubResource("SegmentShape2D_p6dlx")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="out of camera" unique_id=1579666116]
+position = Vector2(3, -1)
+shape = SubResource("SegmentShape2D_eeger")

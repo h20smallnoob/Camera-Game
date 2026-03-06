@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c37xi5uh7laxr"]
+
+[ext_resource type="Texture2D" uid="uid://cfkhdohhiiev3" path="res://ChatGPT Image Feb 24, 2026, 08_07_11 PM.png" id="1_yrq7m"]
+
+[sub_resource type="GDScript" id="GDScript_1il6r"]
+script/source = "extends Area2D
+###NOT IN USE###
+const BOUNCE_VELOCITY = -600
+
+func _on_body_entered(body: Node2D) -> void:
+	velocity.y = BOUNCE_VELOCITY
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h25tl"]
+size = Vector2(22, 8)
+
+[node name="checkpoints" type="Area2D" unique_id=1263293252]
+script = SubResource("GDScript_1il6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1564631981]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_h25tl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=546275076]
+position = Vector2(1, -2.0000038)
+scale = Vector2(0.018554717, 0.017578065)
+texture = ExtResource("1_yrq7m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

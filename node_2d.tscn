@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Texture2D" uid="uid://bh73e8ks1tequ" path="res://centered_1024_scaled.png" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://b0j4mx06naaw" path="res://brackeys_platformer_assets 2/sprites/knight.png" id="1_wtcfe"]
+
+[sub_resource type="GDScript" id="GDScript_wtcfe"]
+script/source = "extends CharacterBody2D
+
+# --- General Settings ---
+@export var throw_force_x: float = 400.0 
+@export var throw_force_y: float = -200.0 
+@export var x_distance: float = 50.0 
+@export var normal_speed: float = 180.0
+@export var carry_speed: float = 120.0
+@export var jump_velocity: float = -320.0
+
+@export_group(\"Push Settings\") 
+@export var push_force: float = 2400.0 
+@export var push_resistance: float = 0.6 
+
+@export_group(\"Camera Pickup Settings\")
+@export var normal_texture: Texture2D
+@export var held_texture: Texture2D
+
+# --- Variables ---
+@onready var sprite = $sprite
+var carried_block: RigidBody2D = null
+@onready var speed: float = normal_speed
+var is_pushing: bool = false
+
+func _ready():
+	await get_tree().process_frame
+	if GameManager.last_checkpoint_pos != Vector2.ZERO:
+		global_position = GameManager.last_checkpoint_pos
+		velocity = Vector2.ZERO 
+
+func die():
+	get_tree().reload_current_scene()
+
+func _input(event):	
+	if event.is_action_pressed(\"interact\"):
+		if carried_block == null:
+			var block = get_tree().root.find_child(\"camera\", true, false)
+			if block and global_position.distance_to(block.global_position) < x_distance:
+				pick_up(block)
+		else:
+			# If the 'throw' action is pressed (Shift+E), call throw_camera
+			if event.is_action_pressed(\"throw\"):
+				throw_camera()
+			else:
+				# Otherwise, just E calls drop_off
+				drop_off()
+
+func pick_up(block):
+	carried_block = block
+	carried_block.freeze = true
+	
+	if carried_block.has_node(\"CollisionShape2D\"):
+		carried_block.get_node(\"CollisionShape2D\").disabled = true
+	
+	carried_block.reparent(self, false)
+	carried_block.position = Vector2(0, -15) 
+	
+	var b_sprite = carried_block.get_node_or_null(\"Sprite2D\")
+	if b_sprite and held_texture:
+		b_sprite.texture = held_texture
+	
+	carried_block.z_index = 10
+	speed = carry_speed
+	jump_velocity = -280
+
+# --- THE DROP FUNCTION ---
+func drop_off():
+	if carried_block == null: return
+	var block = carried_block
+	_prepare_release(block)
+	
+	var side = -1.0 if sprite.flip_h else 1.0
+	block.global_position = global_position + Vector2(side * 30, -5)
+	block.linear_velocity = Vector2.ZERO # No force
+	
+	_finalize_release()
+
+# --- THE THROW FUNCTION (This fixes your error) ---
+func throw_camera():
+	if carried_block == null: return
+	var block = carried_block
+	_prepare_release(block)
+	
+	var side = -1.0 if sprite.flip_h else 1.0
+	block.global_position = global_position + Vector2(side * 30, -10)
+	
+	# Apply Throw Forces
+	var final_vel = velocity 
+	final_vel.x += (side * throw_force_x)
+	final_vel.y += throw_force_y
+	block.linear_velocity = final_vel
+	
+	_finalize_release()
+
+# --- HELPERS ---
+func _prepare_release(block):
+	# 1. Use global_position to \"save\" its spot before reparenting
+	var save_pos = block.global_position
+	
+	# 2. Reparent to the main level
+	block.reparent.call_deferred(get_parent())
+	
+	# 3. Unfreeze and enable collision
+	block.freeze = false
+	if block.has_node(\"CollisionShape2D\"):
+		block.get_node(\"CollisionShape2D\").disabled = false
+	
+	# 4. FIX VISUALS: Reset Z-index and ensure it's not hidden
+	block.z_index = 1 # Set to 1 to be in front of most backgrounds
+	var b_sprite = block.get_node_or_null(\"Sprite2D\")
+	if b_sprite: 
+		b_sprite.texture = normal_texture
+		b_sprite.show() # Ensure it didn't get hidden
+		b_sprite.modulate.a = 1.0 # Ensure it's not transparent
+
+func _finalize_release():
+	carried_block = null
+	_reset_stats()
+
+func _reset_stats():
+	speed = normal_speed
+	jump_velocity = -320
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = jump_velocity
+
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+
+	var current_target_speed = speed * GameManager.player_boost
+	
+	if is_pushing and carried_block == null:
+		current_target_speed = normal_speed * push_resistance
+	
+	if direction != 0:
+		velocity.x = direction * current_target_speed
+		sprite.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_target_speed)
+	
+	move_and_slide()
+
+	# Pushing logic
+	is_pushing = false
+	if carried_block == null:
+		for i in range(get_slide_collision_count()):
+			var collision = get_slide_collision(i)
+			var collider = collision.get_collider()
+			if collider is RigidBody2D:
+				var push_dir = -collision.get_normal()
+				if abs(push_dir.x) > 0.4:
+					is_pushing = true
+					collider.apply_force(push_dir * push_force * collider.mass)
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtcfe"]
+radius = 5.5
+height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epypp"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hol4"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6r6c"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d21ai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epypp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hol4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6r6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdubu")
+}],
+"loop": true,
+"name": &"sprite",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="CharacterBody2D" unique_id=1251469678 groups=["player"]]
+collision_layer = 3
+collision_mask = 3
+script = SubResource("GDScript_wtcfe")
+throw_force_y = -300.0
+normal_texture = ExtResource("1_0e48y")
+held_texture = ExtResource("1_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1905793536]
+position = Vector2(-0.5, -1)
+shape = SubResource("CapsuleShape2D_wtcfe")
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1105211786]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_d21ai")
+animation = &"sprite"
+autoplay = "sprite"
