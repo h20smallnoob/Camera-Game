@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://7hy50n3rnyyc"]
+
+[sub_resource type="GDScript" id="GDScript_325v7"]
+script/source = "extends Area2D
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	GameManager.jump_coin_mult =  GameManager.jump_coin_mult * 1.3
+"
+
+[node name="jump coin" type="Area2D" unique_id=1516647126]
+script = SubResource("GDScript_325v7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

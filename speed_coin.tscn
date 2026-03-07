@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ddg6xefdsu6uw"]
+
+[sub_resource type="GDScript" id="GDScript_bq2qg"]
+script/source = "extends Area2D
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	GameManager.speed_coin_mult = GameManager.speed_coin_mult * 1.25
+"
+
+[node name="speed coin" type="Area2D" unique_id=1051585205]
+script = SubResource("GDScript_bq2qg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
