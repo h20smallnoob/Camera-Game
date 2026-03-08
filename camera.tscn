@@ -10,7 +10,7 @@ func _ready():
 	lock_rotation = true
 	linear_damp = 5.0 
 	if GameManager.last_checkpoint_pos != Vector2.ZERO:
-		global_position = GameManager.last_checkpoint_pos + Vector2(40, -10)
+		global_position = GameManager.last_checkpoint_pos + Vector2(25, -10)
 		
 func _physics_process(_delta):
 
@@ -19,7 +19,7 @@ func _physics_process(_delta):
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_diie0"]
 radius = 5.9999704
-height = 17.999912
+height = 15.999987
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_diie0"]
 a = Vector2(-378, 201)
@@ -59,7 +59,7 @@ shape = SubResource("CapsuleShape2D_diie0")
 one_way_collision_margin = 9.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=179998912]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2.3, 2.3)
 
 [node name="fog" type="Sprite2D" parent="." unique_id=1621446956]
 

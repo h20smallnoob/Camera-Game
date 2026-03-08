@@ -10,13 +10,15 @@ script/source = "extends Area2D
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == 'camera':
 		print('pressed')
-		GameManager.player_boost = 2
+		GameManager.player_boost = 1.5
+		print ('timer start')
 		$Timer.start()
-
+		
 
 
 func _on_timer_timeout() -> void:
 	GameManager.player_boost = 1
+	print ('timer end')
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxja4"]

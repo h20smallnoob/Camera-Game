@@ -12,7 +12,7 @@ script/source = "extends CharacterBody2D
 @export var x_distance: float = 50.0 
 @export var normal_speed: float = 180.0
 @export var carry_speed: float = 135.0
-@export var jump_velocity: float = -300.0
+@export var jump_velocity: float = -287.0
 
 @export_group(\"Push Settings\") 
 @export var push_force: float = 2400.0 
@@ -35,6 +35,7 @@ func _ready():
 		velocity = Vector2.ZERO 
 
 func die():
+	
 	get_tree().reload_current_scene()
 
 func _input(event):	
@@ -44,12 +45,9 @@ func _input(event):
 			if block and global_position.distance_to(block.global_position) < x_distance:
 				pick_up(block)
 		else:
-			if event.is_action_pressed(\"throw\"):
-				throw_camera()
-			else:
-				# Otherwise, just E calls drop_off
-				drop_off()
-
+			drop_off()
+	if event.is_action_pressed(\"throw\"):
+		throw_camera()
 func pick_up(block):
 	carried_block = block
 	carried_block.freeze = true
@@ -66,7 +64,7 @@ func pick_up(block):
 	
 	carried_block.z_index = 10
 	speed = carry_speed
-	jump_velocity = -260
+	jump_velocity = -240
 
 # --- THE DROP FUNCTION ---
 func drop_off():
@@ -124,18 +122,18 @@ func _finalize_release():
 
 func _reset_stats():
 	speed = normal_speed
-	jump_velocity = -300
+	jump_velocity = -287
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = jump_velocity
+		velocity.y = jump_velocity * GameManager.jump_coin_mult
 
 	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
 
-	var current_target_speed = speed * GameManager.player_boost
+	var current_target_speed = speed * GameManager.player_boost * GameManager.speed_coin_mult
 	
 	if is_pushing and carried_block == null:
 		current_target_speed = normal_speed * push_resistance
@@ -163,7 +161,7 @@ func _physics_process(delta: float) -> void:
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtcfe"]
 radius = 5.5
-height = 16.0
+height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epypp"]
 atlas = ExtResource("1_wtcfe")
@@ -211,6 +209,7 @@ held_texture = ExtResource("1_0e48y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1905793536]
 position = Vector2(-0.5, -1)
+scale = Vector2(1, 0.9979334)
 shape = SubResource("CapsuleShape2D_wtcfe")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1105211786]
