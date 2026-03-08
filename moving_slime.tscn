@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cpi0yectaquwb"]
+
+[ext_resource type="Texture2D" uid="uid://c4n4rfvnwvsop" path="res://brackeys_platformer_assets 2/sprites/slime_green.png" id="1_n1vc8"]
+[ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="2_fq4tj"]
+
+[sub_resource type="GDScript" id="GDScript_n1vc8"]
+script/source = "extends Node2D
+@onready var ray_cast_right: RayCast2D = $RayCastRight
+@onready var ray_cast_left: RayCast2D = $RayCastLeft
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+const slime_speed = 60
+var direction = 1
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if ray_cast_right.is_colliding():
+		direction = -1
+		animated_sprite_2d.flip_h = true
+	if ray_cast_left.is_colliding():
+		direction = 1
+		animated_sprite_2d.flip_h = false
+	position.x += slime_speed * delta * direction
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee408"]
+atlas = ExtResource("1_n1vc8")
+region = Rect2(0, 27, 24, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twrp8"]
+atlas = ExtResource("1_n1vc8")
+region = Rect2(24, 27, 24, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4dmh"]
+atlas = ExtResource("1_n1vc8")
+region = Rect2(48, 27, 24, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlams"]
+atlas = ExtResource("1_n1vc8")
+region = Rect2(72, 27, 24, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i030u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee408")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twrp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4dmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlams")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rlhaw"]
+radius = 8.0
+
+[sub_resource type="GDScript" id="GDScript_fq4tj"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="moving slime" type="Node2D" unique_id=1782720323]
+script = SubResource("GDScript_n1vc8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=726890114]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_i030u")
+autoplay = "default"
+
+[node name="killzone" parent="." unique_id=1300626752 instance=ExtResource("2_fq4tj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=359433157]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_rlhaw")
+script = SubResource("GDScript_fq4tj")
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=540707600]
+target_position = Vector2(7, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1675325664]
+target_position = Vector2(-7, 0)
+collide_with_areas = true
