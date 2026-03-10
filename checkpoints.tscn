@@ -7,14 +7,11 @@ script/source = "extends Area2D
 
 func _on_body_entered(body):
 	if body.has_method(\"die\"): 
+		# Overwrite thede global variable with THIS checkpoint's position
 		GameManager.last_checkpoint_pos = global_position
+		GameManager.camera_at_checkpoint = true
 		
-		if body.carried_block != null:
-			GameManager.camera_at_checkpoint = true
-		else:
-			GameManager.camera_at_checkpoint = false
-			
-		print(\"Checkpoint saved! Camera included: \", GameManager.camera_at_checkpoint)
+		print(\"Checkpoint Updated! New position: \", global_position)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h25tl"]

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cr3fx3ftpx8gc"]
+
+[ext_resource type="AudioStream" uid="uid://dw0g3x6fdnp16" path="res://5211523504537600.mp3" id="1_3h6ak"]
+
+[sub_resource type="GDScript" id="GDScript_3h6ak"]
+script/source = "extends AudioStreamPlayer
+"
+
+[node name="music" type="AudioStreamPlayer" unique_id=1675125888]
+stream = ExtResource("1_3h6ak")
+volume_db = 1.0
+autoplay = true
+script = SubResource("GDScript_3h6ak")

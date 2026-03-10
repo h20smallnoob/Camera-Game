@@ -9,6 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://ddg6xefdsu6uw" path="res://speed_coin.tscn" id="7_7rxco"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="8_f7f4c"]
 
+[sub_resource type="GDScript" id="GDScript_f7f4c"]
+script/source = "extends Node2D
+
+
+
+
+
+signal lvlend
+
+func _ready() -> void:
+	if GameManager.scene_num == 1:
+		print('music stopped!')
+		$music.stop()
+"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dbx23"]
 texture = ExtResource("1_031k3")
 0:0/0 = 0
@@ -193,6 +208,7 @@ normal = Vector2(-1, 0)
 distance = -2633.0
 
 [node name="lvl 2" type="Node2D" unique_id=895775542]
+script = SubResource("GDScript_f7f4c")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1472878959]
 tile_set = SubResource("TileSet_tu4c3")
@@ -204,9 +220,6 @@ position = Vector2(-39, 25)
 
 [node name="camera" parent="." unique_id=1169415746 instance=ExtResource("4_bmf8x")]
 position = Vector2(-14, 23)
-
-[node name="speed coin" parent="." unique_id=1051585205 instance=ExtResource("7_7rxco")]
-position = Vector2(1675, 230)
 
 [node name="static" type="StaticBody2D" parent="." unique_id=874488947]
 
@@ -258,11 +271,11 @@ position = Vector2(1721, 331)
 
 [node name="checkpoint" type="Node2D" parent="." unique_id=1873208951]
 
-[node name="checkpoints" parent="checkpoint" unique_id=1263293252 instance=ExtResource("2_1v3ac")]
-position = Vector2(-38, 28)
+[node name="checkpoints2" parent="checkpoint" unique_id=1263293252 instance=ExtResource("2_1v3ac")]
+position = Vector2(1323, 331)
 
-[node name="checkpoints2" parent="checkpoint" unique_id=1271030841 instance=ExtResource("2_1v3ac")]
-position = Vector2(1322, 331)
+[node name="checkpoints" parent="checkpoint" unique_id=404581028 instance=ExtResource("2_1v3ac")]
+position = Vector2(-38, 28)
 
 [node name="checkpoints3" parent="checkpoint" unique_id=437166696 instance=ExtResource("2_1v3ac")]
 position = Vector2(2289, 377)
@@ -274,5 +287,8 @@ position = Vector2(1515, -121)
 position = Vector2(2581, -125)
 next_scene_path = "res://lvl_3.tscn"
 
-[node name="speed coin2" parent="." unique_id=1924478642 instance=ExtResource("7_7rxco")]
-position = Vector2(109, 118)
+[node name="speed coin" parent="." unique_id=1051585205 instance=ExtResource("7_7rxco")]
+position = Vector2(1675, 230)
+
+[node name="speed coin2" parent="." unique_id=1803499073 instance=ExtResource("7_7rxco")]
+position = Vector2(2365, 548)

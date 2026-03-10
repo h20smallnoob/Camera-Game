@@ -17,7 +17,7 @@ func _ready():
 func _on_body_entered(body: Node2D) -> void:
 	print(\"jump coin on body: \", body)
 	if body is CharacterBody2D:
-		GameManager.jump_coin_mult = 1.25
+		GameManager.jump_coin_mult *= 1.25
 		GameManager.collected_jump_coins.append(coin_id)
 		print(\"Jump Boosted! Mult is: \", GameManager.jump_coin_mult)
 		queue_free()

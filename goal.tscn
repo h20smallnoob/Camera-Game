@@ -7,13 +7,15 @@ script/source = "extends Area2D
 
 # This allows you to pick the file in the Inspector
 @export_file(\"*.tscn\") var next_scene_path: String
-
 func _on_body_entered(body: Node2D):
 	# Check if it's the player
 	if body.has_method(\"die\"):
 		# 1. Clear Tutorial data so Level 1 starts fresh
 		GameManager.last_checkpoint_pos = Vector2.ZERO
 		GameManager.camera_at_checkpoint = false
+		GameManager.scene_num = GameManager.scene_num + 1
+
+
 		
 		# 2. Change the scene if a path is set
 		if next_scene_path != \"\":
