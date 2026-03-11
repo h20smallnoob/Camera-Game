@@ -19,6 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		GameManager.jump_coin_mult *= 1.25
 		GameManager.collected_jump_coins.append(coin_id)
+		GameManager.crystal_amount = GameManager.crystal_amount +1
 		print(\"Jump Boosted! Mult is: \", GameManager.jump_coin_mult)
 		queue_free()
 "

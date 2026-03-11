@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://uil4ap6gw7wp"]
 
 [ext_resource type="Texture2D" uid="uid://cfkhdohhiiev3" path="res://ChatGPT Image Feb 24, 2026, 08_07_11 PM.png" id="1_blmln"]
+[ext_resource type="Texture2D" uid="uid://qv0fim340poy" path="res://pixil-frame-0 (10) (1).png" id="2_y3dhi"]
 
 [sub_resource type="GDScript" id="GDScript_1il6r"]
 script/source = "extends Area2D
 
 func _on_body_entered(body):
 	if body.has_method(\"die\"): 
-		# Overwrite thede global variable with THIS checkpoint's position
 		GameManager.last_checkpoint_pos = global_position
 		GameManager.camera_at_checkpoint = true
 		
@@ -17,6 +17,33 @@ func _on_body_entered(body):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h25tl"]
 size = Vector2(22, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks0i8"]
+atlas = ExtResource("1_blmln")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np03c"]
+atlas = ExtResource("2_y3dhi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ks0i8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks0i8")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np03c")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
 [node name="checkpoints" type="Area2D" unique_id=1263293252]
 script = SubResource("GDScript_1il6r")
 
@@ -24,9 +51,11 @@ script = SubResource("GDScript_1il6r")
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_h25tl")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=546275076]
-position = Vector2(1, -2.0000038)
-scale = Vector2(0.018554717, 0.017578065)
-texture = ExtResource("1_blmln")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1503126372]
+position = Vector2(-1, -2)
+scale = Vector2(0.012757837, 0.012737649)
+sprite_frames = SubResource("SpriteFrames_ks0i8")
+animation = &"off"
+autoplay = "off"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

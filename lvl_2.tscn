@@ -20,8 +20,9 @@ signal lvlend
 
 func _ready() -> void:
 	if GameManager.scene_num == 1:
-		print('music stopped!')
-		$music.stop()
+			if is_instance_valid($music):
+				print('music stopped!')
+				$music.stop()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dbx23"]
