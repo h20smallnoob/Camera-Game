@@ -8,7 +8,7 @@ var speed_coin_mult = 1.0
 var jump_coin_mult = 1.0
 var scene_num = 0
 var crystal_amount = 0
-
+var double_jump = 0
 var collected_speed_coins = []
 var collected_jump_coins = []
 func respawn_player(player_instance):

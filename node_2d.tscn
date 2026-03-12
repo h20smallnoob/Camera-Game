@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://4pqund3nukl7"]
 
 [ext_resource type="Texture2D" uid="uid://bh73e8ks1tequ" path="res://centered_1024_scaled.png" id="1_0e48y"]
-[ext_resource type="Texture2D" uid="uid://b0j4mx06naaw" path="res://brackeys_platformer_assets 2/sprites/knight.png" id="1_wtcfe"]
 
 [sub_resource type="GDScript" id="GDScript_wtcfe"]
 script/source = "extends CharacterBody2D
@@ -12,7 +11,7 @@ script/source = "extends CharacterBody2D
 @export var x_distance: float = 50.0 
 @export var normal_speed: float = 180.0
 @export var carry_speed: float = 135.0
-@export var jump_velocity: float = -290.0
+@export var jump_velocity: float = -300.0
 
 
 @export_group(\"Push Settings\") 
@@ -126,15 +125,18 @@ func _finalize_release():
 
 func _reset_stats():
 	speed = normal_speed
-	jump_velocity = -287
+	jump_velocity = -300
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = jump_velocity * GameManager.jump_coin_mult
 
+	
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		if is_on_floor() or GameManager.double_jump == 1:
+			velocity.y = jump_velocity * GameManager.jump_coin_mult
+			GameManager.double_jump = 0
 	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
 
 	var current_target_speed = speed * GameManager.player_boost * GameManager.speed_coin_mult
@@ -167,20 +169,23 @@ func _physics_process(delta: float) -> void:
 radius = 5.5
 height = 14.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wtcfe"]
+load_path = "res://.godot/imported/knight.png-baa2176e65c054362cc590c5ff118064.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_epypp"]
-atlas = ExtResource("1_wtcfe")
+atlas = SubResource("CompressedTexture2D_wtcfe")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hol4"]
-atlas = ExtResource("1_wtcfe")
+atlas = SubResource("CompressedTexture2D_wtcfe")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q6r6c"]
-atlas = ExtResource("1_wtcfe")
+atlas = SubResource("CompressedTexture2D_wtcfe")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
-atlas = ExtResource("1_wtcfe")
+atlas = SubResource("CompressedTexture2D_wtcfe")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d21ai"]

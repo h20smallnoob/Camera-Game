@@ -248,9 +248,6 @@ position = Vector2(19, -11)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=692555591]
 shape = SubResource("WorldBoundaryShape2D_dc44f")
 
-[node name="jump coin" parent="." unique_id=1516647126 instance=ExtResource("6_urlp7")]
-position = Vector2(1055, 114)
-
 [node name="checkpoint" type="Node2D" parent="." unique_id=668064220]
 
 [node name="checkpoints" parent="checkpoint" unique_id=1263293252 instance=ExtResource("4_rno80")]
@@ -314,5 +311,9 @@ text = "Alternatively, if the next site is
 
 [node name="goal" parent="." unique_id=1242369407 instance=ExtResource("9_dc44f")]
 position = Vector2(6090.0366, -393)
+next_scene_path = "uid://sssp3odqa7fi"
+
+[node name="jump coin" parent="." unique_id=1516647126 instance=ExtResource("6_urlp7")]
+position = Vector2(1055, 114)
 
 [connection signal="body_entered" from="jump coin" to="jump coin" method="_on_body_entered"]
