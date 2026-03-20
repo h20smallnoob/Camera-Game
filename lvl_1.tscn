@@ -6,17 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://uil4ap6gw7wp" path="res://checkpoints.tscn" id="4_okdh5"]
 [ext_resource type="PackedScene" uid="uid://c6takejyrn2f3" path="res://button.tscn" id="6_t6wp4"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="7_bcbm8"]
-[ext_resource type="PackedScene" uid="uid://ddg6xefdsu6uw" path="res://speed_coin.tscn" id="9_a1bqk"]
 [ext_resource type="AudioStream" uid="uid://oup13c55u5rt" path="res://brackeys_platformer_assets/music/time_for_adventure.mp3" id="10_4snel"]
 
 [sub_resource type="GDScript" id="GDScript_4snel"]
 script/source = "extends Node
 
-# This creates a slot in the Inspector for you to drag your music file
 @export var level_music: AudioStream
 
 func _ready():
-	# Tell the global controller to play this level's specific music
 	if level_music:
 		Music.play_track(level_music)
 "
@@ -616,6 +613,3 @@ position = Vector2(2181, 456)
 [node name="goal" parent="checkpoint" unique_id=1242369407 instance=ExtResource("7_bcbm8")]
 position = Vector2(2491, 339)
 next_scene_path = "uid://bac60p3n7kf7k"
-
-[node name="speed coin" parent="." unique_id=1051585205 instance=ExtResource("9_a1bqk")]
-position = Vector2(1848, 363)

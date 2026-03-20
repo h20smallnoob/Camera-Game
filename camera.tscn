@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="1_diie0"]
 [ext_resource type="Texture2D" uid="uid://bh73e8ks1tequ" path="res://centered_1024_scaled.png" id="1_u5kg4"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_diie0"]
+
 [sub_resource type="GDScript" id="GDScript_u5kg4"]
 script/source = "extends RigidBody2D
 
@@ -39,7 +41,9 @@ b = Vector2(-365, -222)
 
 [node name="camera" type="RigidBody2D" unique_id=1169415746]
 collision_layer = 9
+collision_mask = 3
 mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_diie0")
 continuous_cd = 1
 contact_monitor = true
 max_contacts_reported = 4

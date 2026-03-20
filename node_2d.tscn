@@ -5,14 +5,12 @@
 [sub_resource type="GDScript" id="GDScript_wtcfe"]
 script/source = "extends CharacterBody2D
 
-# --- General Settings ---
-@export var throw_force_x: float = 400.0 
+@export var throw_force_x: float = 345.0 
 @export var throw_force_y: float = -200.0 
 @export var x_distance: float = 50.0 
 @export var normal_speed: float = 180.0
 @export var carry_speed: float = 135.0
 @export var jump_velocity: float = -300.0
-
 
 @export_group(\"Push Settings\") 
 @export var push_force: float = 2400.0 
@@ -22,23 +20,21 @@ script/source = "extends CharacterBody2D
 @export var normal_texture: Texture2D
 @export var held_texture: Texture2D
 
-# --- Variables ---
 @onready var sprite = $sprite
 var carried_block: RigidBody2D = null
 @onready var speed: float = normal_speed
 var is_pushing: bool = false
+
+var bounce_timer: float = 0.0
 
 func _ready():
 	if GameManager.last_checkpoint_pos != Vector2.ZERO:
 		global_position = GameManager.last_checkpoint_pos
 
 func die():
-	# Ensure we are pulling the NEW position from our Global Autoload 
 	if GameManager.last_checkpoint_pos != Vector2.ZERO:
 		global_position = GameManager.last_checkpoint_pos
-		print(\"Player caught up to checkpoint at: \", global_position)
 	else:
-		# Fallback if no checkpoint was hit yet
 		print(\"No checkpoint found!\")
 		
 func _input(event):	
@@ -51,73 +47,50 @@ func _input(event):
 			drop_off()
 	if event.is_action_pressed(\"throw\"):
 		throw_camera()
+
 func pick_up(block):
 	carried_block = block
 	carried_block.freeze = true
-	
 	if carried_block.has_node(\"CollisionShape2D\"):
 		carried_block.get_node(\"CollisionShape2D\").disabled = true
-	
 	carried_block.reparent(self, false)
 	carried_block.position = Vector2(0, -15) 
-	
 	var b_sprite = carried_block.get_node_or_null(\"Sprite2D\")
 	if b_sprite and held_texture:
 		b_sprite.texture = held_texture
-	
 	carried_block.z_index = 10
 	speed = carry_speed
 	jump_velocity = -240
 
-# --- THE DROP FUNCTION ---
 func drop_off():
 	if carried_block == null: return
 	var block = carried_block
 	_prepare_release(block)
-	
 	var side = -1.0 if sprite.flip_h else 1.0
 	block.global_position = global_position + Vector2(side * 30, -5)
-	block.linear_velocity = Vector2.ZERO # No force
-	
+	block.linear_velocity = Vector2.ZERO
 	_finalize_release()
 
-# --- THE THROW FUNCTION (This fixes your error) ---
 func throw_camera():
 	if carried_block == null: return
 	var block = carried_block
 	_prepare_release(block)
-	
 	var side = -1.0 if sprite.flip_h else 1.0
 	block.global_position = global_position + Vector2(side * 30, -10)
-	
-	# Apply Throw Forces
 	var final_vel = velocity 
 	final_vel.x += (side * throw_force_x)
 	final_vel.y += throw_force_y
 	block.linear_velocity = final_vel
-	
 	_finalize_release()
 
-# --- HELPERS ---
 func _prepare_release(block):
-	# 1. Use global_position to \"save\" its spot before reparenting
-	var save_pos = block.global_position
-	
-	# 2. Reparent to the main level
 	block.reparent.call_deferred(get_parent())
-	
-	# 3. Unfreeze and enable collision
 	block.freeze = false
 	if block.has_node(\"CollisionShape2D\"):
 		block.get_node(\"CollisionShape2D\").disabled = false
-	
-	# 4. FIX VISUALS: Reset Z-index and ensure it's not hidden
-	block.z_index = 1 # Set to 1 to be in front of most backgrounds
 	var b_sprite = block.get_node_or_null(\"Sprite2D\")
 	if b_sprite: 
 		b_sprite.texture = normal_texture
-		b_sprite.show() # Ensure it didn't get hidden
-		b_sprite.modulate.a = 1.0 # Ensure it's not transparent
 
 func _finalize_release():
 	carried_block = null
@@ -130,39 +103,50 @@ func _reset_stats():
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
 
-	
-	if Input.is_action_just_pressed(\"ui_accept\"):
-		if is_on_floor() or GameManager.double_jump == 1:
-			velocity.y = jump_velocity * GameManager.jump_coin_mult
-			GameManager.double_jump = 0
-	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	var current_dir := Input.get_axis(\"ui_left\", \"ui_right\")
 
-	var current_target_speed = speed * GameManager.player_boost * GameManager.speed_coin_mult
-	
-	if is_pushing and carried_block == null:
-		current_target_speed = normal_speed * push_resistance
-	
-	if direction != 0:
-		velocity.x = direction * current_target_speed
-		sprite.flip_h = direction < 0
+	if GameManager.bounce_out == 1:
+		GameManager.bounce_out = 0
+		var bounce_side = -current_dir
+		if current_dir == 0:
+			bounce_side = 1.0 if sprite.flip_h else -1.0
+		
+		velocity.y = -300
+		velocity.x = bounce_side * 0
+		bounce_timer = 0.25 
+		print(\"Arcing!\")
+
+	if bounce_timer > 0:
+		bounce_timer -= delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, current_target_speed)
-	
+		var current_target_speed = speed * GameManager.player_boost * GameManager.speed_coin_mult
+		if is_pushing and carried_block == null:
+			current_target_speed = normal_speed * push_resistance
+		
+		if current_dir != 0:
+			velocity.x = current_dir * current_target_speed
+			sprite.flip_h = current_dir < 0
+		else:
+			velocity.x = move_toward(velocity.x, 0, current_target_speed)
+
+		if Input.is_action_just_pressed(\"ui_accept\"):
+			if is_on_floor() or GameManager.double_jump == 1:
+				velocity.y = jump_velocity * GameManager.jump_coin_mult
+				GameManager.double_jump = 0
+
 	move_and_slide()
 
-	# Pushing logic
 	is_pushing = false
 	if carried_block == null:
 		for i in range(get_slide_collision_count()):
 			var collision = get_slide_collision(i)
 			var collider = collision.get_collider()
 			if collider is RigidBody2D:
-				var push_dir = -collision.get_normal()
-				if abs(push_dir.x) > 0.4:
+				var push_normal = -collision.get_normal()
+				if abs(push_normal.x) > 0.4:
 					is_pushing = true
-					collider.apply_force(push_dir * push_force * collider.mass)
+					collider.apply_force(push_normal * push_force * collider.mass)
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtcfe"]

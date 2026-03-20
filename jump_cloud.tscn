@@ -30,8 +30,8 @@ height = 34.0
 script = SubResource("GDScript_x7s3k")
 
 [node name="ChatGptImageFeb24,2026,080711Pm" type="Sprite2D" parent="." unique_id=402413711]
-position = Vector2(4.7683716e-07, 0)
-scale = Vector2(0.03094483, 0.03320313)
+position = Vector2(0, -1)
+scale = Vector2(0.022308351, 0.02246094)
 texture = ExtResource("1_x7s3k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=18655064]

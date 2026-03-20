@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bq2v2mfguw7oq"]
+
+[sub_resource type="GDScript" id="GDScript_wivt8"]
+script/source = "extends Area2D
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	GameManager.crystal_amount += 1
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wivt8"]
+
+[node name="crystal" type="Area2D" unique_id=1587935847]
+script = SubResource("GDScript_wivt8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1179885773]
+shape = SubResource("CircleShape2D_wivt8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

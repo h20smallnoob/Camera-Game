@@ -556,7 +556,7 @@ offset_right = 783.0
 offset_bottom = 141.0
 scale = Vector2(0.956132, 1.0752743)
 theme_override_fonts/font = SubResource("FontFile_4snel")
-text = "Tutorial      1      2      3      4      5      6"
+text = "Tutorial      1      2      3      4      5"
 
 [node name="level select" type="Node2D" parent="." unique_id=618755030]
 
@@ -582,10 +582,6 @@ next_scene_path = "uid://sssp3odqa7fi"
 [node name="goal6" parent="level select" unique_id=848052848 instance=ExtResource("3_m82nj")]
 position = Vector2(699, 198)
 next_scene_path = "uid://c73pjmdg4esfy"
-
-[node name="goal7" parent="level select" unique_id=944979458 instance=ExtResource("3_m82nj")]
-position = Vector2(758, 198)
-next_scene_path = "res://lvl_6.tscn"
 
 [node name="Node2D" parent="." unique_id=1251469678 instance=ExtResource("4_ij0qm")]
 position = Vector2(0, 152)

@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c6takejyrn2f3" path="res://button.tscn" id="7_o7vtu"]
 [ext_resource type="PackedScene" uid="uid://cpi0yectaquwb" path="res://moving_slime.tscn" id="8_emw0k"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="9_ufpfk"]
-[ext_resource type="PackedScene" uid="uid://7hy50n3rnyyc" path="res://jump_coin.tscn" id="10_i37vr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sggpl"]
 texture = ExtResource("1_hmyab")
@@ -394,6 +393,9 @@ position = Vector2(3449, 349)
 position = Vector2(2625, 73)
 scale = Vector2(0.9718812, 0.9984227)
 
+[node name="checkpoints8" parent="checkpoint" unique_id=1109246497 instance=ExtResource("4_6ntf1")]
+position = Vector2(3615, 374)
+
 [node name="goal" parent="checkpoint" unique_id=1242369407 instance=ExtResource("9_ufpfk")]
 position = Vector2(3725, 2543)
 next_scene_path = "res://lvl_5.tscn"
@@ -401,8 +403,3 @@ next_scene_path = "res://lvl_5.tscn"
 [node name="goal e" parent="checkpoint" unique_id=1550001837 instance=ExtResource("9_ufpfk")]
 position = Vector2(4134, 1682)
 next_scene_path = "uid://cunmdt6u21rl"
-
-[node name="jump coin" parent="." unique_id=1516647126 instance=ExtResource("10_i37vr")]
-position = Vector2(3581, 1019)
-
-[connection signal="body_entered" from="jump coin" to="jump coin" method="_on_body_entered"]

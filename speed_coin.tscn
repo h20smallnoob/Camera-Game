@@ -16,7 +16,7 @@ func _ready():
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		GameManager.speed_coin_mult *= 1.25
+		GameManager.speed_coin_mult += 0.25
 		GameManager.collected_speed_coins.append(coin_id)
 		GameManager.crystal_amount = GameManager.crystal_amount +1
 		print(\"Speed Boosted! Mult is: \", GameManager.speed_coin_mult)
