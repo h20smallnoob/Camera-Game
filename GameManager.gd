@@ -12,7 +12,7 @@ var crystal_amount = 0
 var double_jump = 0
 var collected_speed_coins = []
 var collected_jump_coins = []
-
+var test = 1
 func respawn_player(player_instance):
 	if last_checkpoint_pos != Vector2.ZERO:
 		player_instance.global_position = last_checkpoint_pos

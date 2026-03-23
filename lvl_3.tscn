@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://q6li4vvuexaj" path="res://brackeys_platformer_assets 2/fonts/PixelOperator8.ttf" id="7_31vo8"]
 [ext_resource type="FontFile" uid="uid://b8sy0dlfxwspv" path="res://brackeys_platformer_assets 2/fonts/PixelOperator8-Bold.ttf" id="8_dc44f"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="9_dc44f"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="9_sbval"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyj2s"]
 texture = ExtResource("1_w005c")
@@ -225,6 +226,21 @@ sources/0 = SubResource("TileSetAtlasSource_lyj2s")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dc44f"]
 distance = -646.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_islhk"]
+atlas = ExtResource("9_sbval")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ye7io"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_islhk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_31vo8"]
 normal = Vector2(-1, 0)
 distance = -6101.0347
@@ -315,6 +331,9 @@ text = "Alternatively, if the next site is
 [node name="goal" parent="." unique_id=1242369407 instance=ExtResource("9_dc44f")]
 position = Vector2(6090.0366, -393)
 next_scene_path = "uid://sssp3odqa7fi"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="goal" unique_id=948249957]
+sprite_frames = SubResource("SpriteFrames_ye7io")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=77668591]
 

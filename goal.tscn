@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://bugmfl3kw87vl"]
 
-[ext_resource type="Texture2D" uid="uid://clnu16cni5qqc" path="res://brackeys_platformer_assets 2/sprites/fruit.png" id="1_6k3qi"]
-
 [sub_resource type="GDScript" id="GDScript_0qle8"]
 script/source = "extends Area2D
 
@@ -11,7 +9,7 @@ func _on_body_entered(body: Node2D):
 		GameManager.last_checkpoint_pos = Vector2.ZERO
 		GameManager.camera_at_checkpoint = false
 		GameManager.scene_num = GameManager.scene_num + 1
-
+		GameManager.crystal_amount +=1
 
 		
 		if next_scene_path != \"\":
@@ -21,6 +19,7 @@ func _on_body_entered(body: Node2D):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p20yd"]
+size = Vector2(13, 13)
 
 [node name="goal" type="Area2D" unique_id=1242369407]
 script = SubResource("GDScript_0qle8")
@@ -28,10 +27,5 @@ next_scene_path = "uid://cq8k0vx8yc213"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2124503515]
 shape = SubResource("RectangleShape2D_p20yd")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052131081]
-position = Vector2(1, 0)
-scale = Vector2(0.3125, 0.296875)
-texture = ExtResource("1_6k3qi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

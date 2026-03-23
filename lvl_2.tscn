@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://bac60p3n7kf7k"]
 
+[ext_resource type="AudioStream" uid="uid://coydqgtydj0k" path="res://chiptune banger.mp3" id="1_f7f4c"]
 [ext_resource type="PackedScene" uid="uid://uil4ap6gw7wp" path="res://checkpoints.tscn" id="2_1v3ac"]
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="3_l31ol"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="4_bmf8x"]
 [ext_resource type="PackedScene" uid="uid://bhyctoxdkruw4" path="res://slime.tscn" id="5_l31ol"]
 [ext_resource type="PackedScene" uid="uid://cpi0yectaquwb" path="res://moving_slime.tscn" id="6_bmf8x"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="7_7rxco"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="8_f7f4c"]
 
 [sub_resource type="GDScript" id="GDScript_f7f4c"]
@@ -203,8 +205,24 @@ distance = -150.9278
 normal = Vector2(-1, 0)
 distance = -2633.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7f4c"]
+atlas = ExtResource("7_7rxco")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_beans"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7f4c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="lvl 2" type="Node2D" unique_id=895775542]
 script = SubResource("GDScript_f7f4c")
+level_music = ExtResource("1_f7f4c")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1472878959]
 tile_set = SubResource("TileSet_tu4c3")
@@ -282,3 +300,6 @@ position = Vector2(1515, -121)
 [node name="goal" parent="checkpoint" unique_id=1242369407 instance=ExtResource("8_f7f4c")]
 position = Vector2(2581, -125)
 next_scene_path = "res://lvl_3.tscn"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="checkpoint/goal" unique_id=1840192044]
+sprite_frames = SubResource("SpriteFrames_beans")

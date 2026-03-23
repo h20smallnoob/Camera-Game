@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c6takejyrn2f3" path="res://button.tscn" id="7_o7vtu"]
 [ext_resource type="PackedScene" uid="uid://cpi0yectaquwb" path="res://moving_slime.tscn" id="8_emw0k"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="9_ufpfk"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="10_i37vr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sggpl"]
 texture = ExtResource("1_hmyab")
@@ -218,6 +219,36 @@ size = Vector2(2202, 193)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emw0k"]
 size = Vector2(30, 319)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eidr8"]
+atlas = ExtResource("10_i37vr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sfugp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eidr8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i37vr"]
+atlas = ExtResource("10_i37vr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eidr8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i37vr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="lvl_4" type="Node2D" unique_id=1956365252]
 position = Vector2(-20, -1)
 
@@ -400,6 +431,12 @@ position = Vector2(3615, 374)
 position = Vector2(3725, 2543)
 next_scene_path = "res://lvl_5.tscn"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="checkpoint/goal" unique_id=1174279970]
+sprite_frames = SubResource("SpriteFrames_sfugp")
+
 [node name="goal e" parent="checkpoint" unique_id=1550001837 instance=ExtResource("9_ufpfk")]
 position = Vector2(4134, 1682)
 next_scene_path = "uid://cunmdt6u21rl"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="checkpoint/goal e" unique_id=984289540]
+sprite_frames = SubResource("SpriteFrames_eidr8")

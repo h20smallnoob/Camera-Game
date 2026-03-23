@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://beq8y1736gda5"]
 
-[ext_resource type="Texture2D" uid="uid://cfkhdohhiiev3" path="res://ChatGPT Image Feb 24, 2026, 08_07_11 PM.png" id="1_x7s3k"]
+[ext_resource type="Texture2D" uid="uid://to5bk63jgcki" path="res://pixil-frame-0 (7) (1).png" id="1_x7s3k"]
 
 [sub_resource type="GDScript" id="GDScript_x7s3k"]
 script/source = "
@@ -23,19 +23,20 @@ func _on_body_exited(body: Node2D) -> void:
 "
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7s3k"]
-radius = 11.0
-height = 34.0
+radius = 9.0
+height = 40.0
 
 [node name="jump_cloud" type="Area2D" unique_id=47627852]
 script = SubResource("GDScript_x7s3k")
 
-[node name="ChatGptImageFeb24,2026,080711Pm" type="Sprite2D" parent="." unique_id=402413711]
-position = Vector2(0, -1)
-scale = Vector2(0.022308351, 0.02246094)
-texture = ExtResource("1_x7s3k")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=18655064]
+rotation = -1.5391362
 shape = SubResource("CapsuleShape2D_x7s3k")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463698477]
+position = Vector2(455, 501)
+scale = Vector2(2.030967, 2.1032445)
+texture = ExtResource("1_x7s3k")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

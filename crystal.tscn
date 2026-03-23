@@ -1,20 +1,44 @@
 [gd_scene format=3 uid="uid://bq2v2mfguw7oq"]
 
-[sub_resource type="GDScript" id="GDScript_wivt8"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="1_200vn"]
+
+[sub_resource type="GDScript" id="GDScript_200vn"]
 script/source = "extends Area2D
 
 
-
 func _on_body_entered(body: Node2D) -> void:
-	GameManager.crystal_amount += 1
+	
+	if body is CharacterBody2D:
+		GameManager.crystal_amount = GameManager.crystal_amount +1
+		queue_free()
+			
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxb6e"]
+atlas = ExtResource("1_200vn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wivt8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxb6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wivt8"]
 
-[node name="crystal" type="Area2D" unique_id=1587935847]
-script = SubResource("GDScript_wivt8")
+[node name="area" type="Area2D" unique_id=1577104762]
+script = SubResource("GDScript_200vn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1179885773]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=199974578]
+sprite_frames = SubResource("SpriteFrames_wivt8")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1065812844]
 shape = SubResource("CircleShape2D_wivt8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

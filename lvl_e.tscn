@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cunmdt6u21rl"]
 
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="2_m82nj"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="3_m82nj"]
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="4_ij0qm"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="5_vidpu"]
@@ -531,6 +532,96 @@ cache/0/50/0/glyphs/69/size = Vector2(34, 45)
 cache/0/50/0/glyphs/69/uv_rect = Rect2(97, 1, 34, 45)
 cache/0/50/0/glyphs/69/texture_idx = 0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij0qm"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vidpu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij0qm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwvsi"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqjw5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwvsi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wipg3"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1d7dx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wipg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy8pu"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ya1q8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy8pu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkbit"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1wk61"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkbit")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqb6p"]
+atlas = ExtResource("2_m82nj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y01mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqb6p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="lvl_e" type="Node2D" unique_id=1516883482]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1591219547]
@@ -564,24 +655,42 @@ text = "Tutorial      1      2      3      4      5"
 position = Vector2(360, 193)
 next_scene_path = "uid://c6jkds74fn2mm"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal" unique_id=1537222930]
+sprite_frames = SubResource("SpriteFrames_vidpu")
+
 [node name="goal2" parent="level select" unique_id=1521261260 instance=ExtResource("3_m82nj")]
 position = Vector2(465, 194)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal2" unique_id=1742817610]
+sprite_frames = SubResource("SpriteFrames_iqjw5")
 
 [node name="goal3" parent="level select" unique_id=843061683 instance=ExtResource("3_m82nj")]
 position = Vector2(520, 195)
 next_scene_path = "uid://bac60p3n7kf7k"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal3" unique_id=58061048]
+sprite_frames = SubResource("SpriteFrames_1d7dx")
+
 [node name="goal4" parent="level select" unique_id=1938788930 instance=ExtResource("3_m82nj")]
 position = Vector2(581, 196)
 next_scene_path = "uid://deh03uaprqoea"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal4" unique_id=238951060]
+sprite_frames = SubResource("SpriteFrames_ya1q8")
 
 [node name="goal5" parent="level select" unique_id=1494728280 instance=ExtResource("3_m82nj")]
 position = Vector2(641, 197)
 next_scene_path = "uid://sssp3odqa7fi"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal5" unique_id=744980298]
+sprite_frames = SubResource("SpriteFrames_1wk61")
+
 [node name="goal6" parent="level select" unique_id=848052848 instance=ExtResource("3_m82nj")]
 position = Vector2(699, 198)
 next_scene_path = "uid://c73pjmdg4esfy"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal6" unique_id=1554880106]
+sprite_frames = SubResource("SpriteFrames_y01mk")
 
 [node name="Node2D" parent="." unique_id=1251469678 instance=ExtResource("4_ij0qm")]
 position = Vector2(0, 152)

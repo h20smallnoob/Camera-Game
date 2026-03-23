@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="4_3p4g5"]
 [ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="5_yfixo"]
 [ext_resource type="PackedScene" uid="uid://beq8y1736gda5" path="res://jump_cloud.tscn" id="6_3p4g5"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="7_f1x0v"]
 [ext_resource type="PackedScene" uid="uid://cpi0yectaquwb" path="res://moving_slime.tscn" id="8_43e0g"]
 [ext_resource type="PackedScene" uid="uid://c6takejyrn2f3" path="res://button.tscn" id="9_80jhk"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="10_f1x0v"]
@@ -210,6 +211,21 @@ sources/0 = SubResource("TileSetAtlasSource_h0m0d")
 normal = Vector2(1, 0)
 distance = -145.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynq33"]
+atlas = ExtResource("7_f1x0v")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxytp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynq33")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv8lu"]
 size = Vector2(142, 29)
 
@@ -286,6 +302,9 @@ position = Vector2(-1, -5)
 [node name="goal" parent="checkpoint" unique_id=1242369407 instance=ExtResource("10_f1x0v")]
 position = Vector2(2110, -690)
 next_scene_path = "uid://dghtn3rms31wt"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="checkpoint/goal" unique_id=285076818]
+sprite_frames = SubResource("SpriteFrames_qxytp")
 
 [node name="jump clouds" type="Node2D" parent="." unique_id=1141533829]
 

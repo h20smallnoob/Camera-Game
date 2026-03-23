@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="3_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="4_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://uil4ap6gw7wp" path="res://checkpoints.tscn" id="7_nfk4m"]
+[ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="8_7ycvg"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="8_66tet"]
 [ext_resource type="AudioStream" uid="uid://dw0g3x6fdnp16" path="res://5211523504537600.mp3" id="10_wr18j"]
 
@@ -529,6 +530,21 @@ cache/0/50/0/glyphs/69/size = Vector2(34, 45)
 cache/0/50/0/glyphs/69/uv_rect = Rect2(97, 1, 34, 45)
 cache/0/50/0/glyphs/69/texture_idx = 0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr18j"]
+atlas = ExtResource("8_7ycvg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qwutr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr18j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wr18j"]
 normal = Vector2(0.99988896, -0.0149007095)
 distance = -1970.3905
@@ -656,6 +672,9 @@ text = "Collect the crystal and move on to the next level!"
 
 [node name="goal" parent="." unique_id=1242369407 instance=ExtResource("8_66tet")]
 position = Vector2(2731, -338)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="goal" unique_id=959244575]
+sprite_frames = SubResource("SpriteFrames_qwutr")
 
 [node name="checkpoints" parent="." unique_id=1263293252 instance=ExtResource("7_nfk4m")]
 position = Vector2(1310, 6)
