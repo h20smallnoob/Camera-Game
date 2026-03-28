@@ -27,7 +27,7 @@ func death_sequence() -> void:
 	canvas.add_child(fade)
 	var tween = create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property(fade, \"color:a\", 1.0, 1.5) # 1.5 second fade
+	tween.tween_property(fade, \"color:a\", 1.0, 1.5) 
 	await tween.finished
 	get_tree().reload_current_scene()
 "

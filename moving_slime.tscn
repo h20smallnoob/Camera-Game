@@ -81,6 +81,8 @@ sprite_frames = SubResource("SpriteFrames_i030u")
 autoplay = "default"
 
 [node name="killzone" parent="." unique_id=1300626752 instance=ExtResource("2_fq4tj")]
+collision_layer = 65
+collision_mask = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=359433157]
 position = Vector2(0, -1)
@@ -89,9 +91,10 @@ script = SubResource("GDScript_fq4tj")
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=540707600]
 target_position = Vector2(7, 0)
-collision_mask = 3
+collision_mask = 67
 collide_with_areas = true
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1675325664]
 target_position = Vector2(-7, 0)
+collision_mask = 65
 collide_with_areas = true

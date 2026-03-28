@@ -34,8 +34,8 @@ rotation = -1.5391362
 shape = SubResource("CapsuleShape2D_x7s3k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463698477]
-position = Vector2(455, 501)
-scale = Vector2(2.030967, 2.1032445)
+position = Vector2(315.00003, 500)
+scale = Vector2(1.4040002, 2.1116223)
 texture = ExtResource("1_x7s3k")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

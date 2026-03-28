@@ -40,8 +40,8 @@ a = Vector2(-368, 207)
 b = Vector2(-365, -222)
 
 [node name="camera" type="RigidBody2D" unique_id=1169415746]
-collision_layer = 9
-collision_mask = 3
+collision_layer = 137
+collision_mask = 131
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_diie0")
 continuous_cd = 1

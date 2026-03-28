@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="3_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="4_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://uil4ap6gw7wp" path="res://checkpoints.tscn" id="7_nfk4m"]
+[ext_resource type="FontFile" uid="uid://q6li4vvuexaj" path="res://brackeys_platformer_assets 2/fonts/PixelOperator8.ttf" id="7_wr18j"]
 [ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="8_7ycvg"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="8_66tet"]
 [ext_resource type="AudioStream" uid="uid://dw0g3x6fdnp16" path="res://5211523504537600.mp3" id="10_wr18j"]
@@ -669,6 +670,17 @@ offset_bottom = -384.30164
 scale = Vector2(0.7412456, 1.1676097)
 theme_override_fonts/font = SubResource("FontFile_4snel")
 text = "Collect the crystal and move on to the next level!"
+
+[node name="tutorial_secret" type="Label" parent="labels" unique_id=170396288]
+offset_left = -1734.0001
+offset_top = -258.0
+offset_right = -952.0001
+offset_bottom = -204.0
+scale = Vector2(0.54572076, 0.61679006)
+theme_override_fonts/font = ExtResource("7_wr18j")
+text = "There used to be a secret 
+coin here but it was removed 
+so yeah"
 
 [node name="goal" parent="." unique_id=1242369407 instance=ExtResource("8_66tet")]
 position = Vector2(2731, -338)
