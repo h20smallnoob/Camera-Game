@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://deh03uaprqoea"]
 
+[ext_resource type="AudioStream" uid="uid://i0oplqjvwdr1" path="res://bb09a917.mp3" id="1_sbval"]
 [ext_resource type="Texture2D" uid="uid://bhuoep2p72pxc" path="res://brackeys_platformer_assets 2/sprites/world_tileset.png" id="1_w005c"]
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="2_dnxd7"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="3_urlp7"]
@@ -9,6 +10,16 @@
 [ext_resource type="FontFile" uid="uid://b8sy0dlfxwspv" path="res://brackeys_platformer_assets 2/fonts/PixelOperator8-Bold.ttf" id="8_dc44f"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="9_dc44f"]
 [ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="9_sbval"]
+
+[sub_resource type="GDScript" id="GDScript_dc44f"]
+script/source = "extends Node
+
+@export var level_music: AudioStream
+
+func _ready():
+	if level_music:
+		Music.play_track(level_music)
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lyj2s"]
 texture = ExtResource("1_w005c")
@@ -247,6 +258,8 @@ distance = -6101.0347
 
 [node name="lvl 3" type="Node2D" unique_id=484540458]
 scale = Vector2(1.0001582, 1)
+script = SubResource("GDScript_dc44f")
+level_music = ExtResource("1_sbval")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1408846086]
 position = Vector2(0, 4)
@@ -305,10 +318,10 @@ theme_override_fonts/font = ExtResource("8_dc44f")
 text = "HYPERDASH!"
 
 [node name="Label3" type="Label" parent="Labels" unique_id=1653663823]
-offset_left = 4812.239
-offset_top = -28.0
-offset_right = 5504.239
-offset_bottom = 47.0
+offset_left = 4985.212
+offset_top = 222.00002
+offset_right = 5677.212
+offset_bottom = 297.0
 scale = Vector2(0.50026894, 0.602456)
 theme_override_fonts/font = ExtResource("7_31vo8")
 theme_override_font_sizes/font_size = 16
@@ -318,13 +331,13 @@ Instead, drop the camera, then jump and
 while carrying the camera!"
 
 [node name="Label4" type="Label" parent="Labels" unique_id=1868896584]
-offset_left = 5003.2085
-offset_top = 211.00002
-offset_right = 5409.2085
-offset_bottom = 286.0
+offset_left = 4836.2344
+offset_top = -41.00001
+offset_right = 5242.2344
+offset_bottom = 33.999973
 scale = Vector2(0.7809677, 0.99393344)
 theme_override_fonts/font = ExtResource("7_31vo8")
-text = "Alternatively, if the next site is
+text = "If the next site is
  too far away, you can throw
  the camera, then follow it!"
 

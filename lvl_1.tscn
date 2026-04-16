@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cq8k0vx8yc213"]
 
+[ext_resource type="AudioStream" uid="uid://baspwc2i43ib5" path="res://very cool music.mp3" id="1_31jyx"]
 [ext_resource type="PackedScene" uid="uid://dqgvg7ek30774" path="res://killzone.tscn" id="1_clg6b"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="2_okdh5"]
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="3_clg6b"]
@@ -7,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c6takejyrn2f3" path="res://button.tscn" id="6_t6wp4"]
 [ext_resource type="PackedScene" uid="uid://bugmfl3kw87vl" path="res://goal.tscn" id="7_bcbm8"]
 [ext_resource type="Texture2D" uid="uid://c6llepvdbdy7o" path="res://pixil-frame-0 (6) (1).png" id="8_31jyx"]
-[ext_resource type="AudioStream" uid="uid://oup13c55u5rt" path="res://brackeys_platformer_assets/music/time_for_adventure.mp3" id="10_4snel"]
 
 [sub_resource type="GDScript" id="GDScript_4snel"]
 script/source = "extends Node
@@ -564,7 +564,7 @@ animations = [{
 
 [node name="lvl 1" type="Node2D" unique_id=347935391]
 script = SubResource("GDScript_4snel")
-level_music = ExtResource("10_4snel")
+level_music = ExtResource("1_31jyx")
 
 [node name="killzone" parent="." unique_id=1300626752 instance=ExtResource("1_clg6b")]
 

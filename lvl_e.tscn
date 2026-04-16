@@ -592,15 +592,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hkbit"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m82nj"]
 atlas = ExtResource("2_m82nj")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1wk61"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hkbit")
+"texture": SubResource("AtlasTexture_m82nj")
 }],
 "loop": true,
 "name": &"default",
@@ -652,48 +652,49 @@ text = "Tutorial      1      2      3      4      5"
 [node name="level select" type="Node2D" parent="." unique_id=618755030]
 
 [node name="goal" parent="level select" unique_id=1242369407 instance=ExtResource("3_m82nj")]
-position = Vector2(360, 193)
+position = Vector2(356, 182)
 next_scene_path = "uid://c6jkds74fn2mm"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal" unique_id=1537222930]
 sprite_frames = SubResource("SpriteFrames_vidpu")
 
 [node name="goal2" parent="level select" unique_id=1521261260 instance=ExtResource("3_m82nj")]
-position = Vector2(465, 194)
+position = Vector2(461, 183)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal2" unique_id=1742817610]
 sprite_frames = SubResource("SpriteFrames_iqjw5")
 
 [node name="goal3" parent="level select" unique_id=843061683 instance=ExtResource("3_m82nj")]
-position = Vector2(520, 195)
+position = Vector2(516, 184)
 next_scene_path = "uid://bac60p3n7kf7k"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal3" unique_id=58061048]
 sprite_frames = SubResource("SpriteFrames_1d7dx")
 
 [node name="goal4" parent="level select" unique_id=1938788930 instance=ExtResource("3_m82nj")]
-position = Vector2(581, 196)
+position = Vector2(577, 185)
 next_scene_path = "uid://deh03uaprqoea"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal4" unique_id=238951060]
 sprite_frames = SubResource("SpriteFrames_ya1q8")
 
 [node name="goal5" parent="level select" unique_id=1494728280 instance=ExtResource("3_m82nj")]
-position = Vector2(641, 197)
+position = Vector2(637, 186)
 next_scene_path = "uid://sssp3odqa7fi"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal5" unique_id=744980298]
 sprite_frames = SubResource("SpriteFrames_1wk61")
 
 [node name="goal6" parent="level select" unique_id=848052848 instance=ExtResource("3_m82nj")]
-position = Vector2(699, 198)
+position = Vector2(695, 187)
 next_scene_path = "uid://c73pjmdg4esfy"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="level select/goal6" unique_id=1554880106]
+position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_y01mk")
 
 [node name="Node2D" parent="." unique_id=1251469678 instance=ExtResource("4_ij0qm")]
-position = Vector2(0, 152)
+position = Vector2(-1, 153)
 
 [node name="camera" parent="." unique_id=1169415746 instance=ExtResource("5_vidpu")]
 position = Vector2(19, 152)

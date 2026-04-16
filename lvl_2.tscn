@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bac60p3n7kf7k"]
 
-[ext_resource type="AudioStream" uid="uid://coydqgtydj0k" path="res://chiptune banger.mp3" id="1_f7f4c"]
+[ext_resource type="AudioStream" uid="uid://pilj3sah2ppq" path="res://chiptune banger (1).mp3" id="1_f7f4c"]
 [ext_resource type="PackedScene" uid="uid://uil4ap6gw7wp" path="res://checkpoints.tscn" id="2_1v3ac"]
 [ext_resource type="PackedScene" uid="uid://4pqund3nukl7" path="res://node_2d.tscn" id="3_l31ol"]
 [ext_resource type="PackedScene" uid="uid://ck0u4xiq2mfum" path="res://camera.tscn" id="4_bmf8x"]
